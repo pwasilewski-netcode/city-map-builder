@@ -1,0 +1,28 @@
+@mixin elevate($level) {
+    z-index: map-get($layout-elevation, $level);
+}
+
+@mixin border-tile($side, $color, $width: 1px) {
+    border-#{$side}: $width dashed $color;
+}
+
+@mixin set-size($dim, $size) {
+    max-#{$dim}: $size;
+    min-#{$dim}: $size;
+    #{$dim}: $size;
+}
+
+@mixin box($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin component($type: default) {
+    $color: get-component-color($type);
+
+    background: map-get($color, back);
+    color: map-get($color, fore);
+    box-shadow: $button-box-shadow;
+    border-radius: .5em;
+    box-sizing: border-box;
+}

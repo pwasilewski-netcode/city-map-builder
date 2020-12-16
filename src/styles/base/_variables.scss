@@ -1,0 +1,47 @@
+$font-size: 16px;
+
+$tile-width: (132px / 2) + 2;
+$tile-height: (132px / 2) + 2; //101px
+
+$map-tiles: 32;
+$map-size: $map-tiles * $map-tiles;
+$map-tile-width: 65px;
+$map-tile-height: 18px;
+$map-tile-transform: skewX(-60deg) rotate(15deg);
+$map-tile-untransform: rotate(-15deg) skewX(60deg) translate(48px, -24px);
+
+$darken-color: rgba(0, 0, 0, .3);
+$lighten-color: rgba(255, 255, 255, .3);
+
+$layout-color: #bae5ff;
+$layout-lighten-color: lighten($layout-color, 10%);
+$layout-darken-color: darken($layout-color, 50%);
+$layout-margin: (
+    lg: 50px,
+    sm: 10px
+);
+$layout-elevation: (
+    top: 2,
+    middle: 1,
+    zero: 0,
+    bottom: -1
+);
+
+$component-colors: (
+    default: (
+        back: linear-gradient(to bottom, $layout-lighten-color 0%, $layout-color 100%),
+        fore: $layout-darken-color
+    ),
+    active: (
+        back: linear-gradient(to bottom, darken($layout-lighten-color, 5%) 0%, darken($layout-color, 10%) 100%),
+        fore: $layout-darken-color
+    ),
+    label: (
+        back: #369d7c,
+        fore: #edfffd
+    )
+);
+
+$button-font-size: 1.5em;
+$button-size: 2em;
+$button-box-shadow: 1px 5px 5px rgba(0,0,0,.5);

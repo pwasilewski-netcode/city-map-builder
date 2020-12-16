@@ -1,0 +1,19 @@
+@import "../base/all";
+
+#map-header {
+    display: flex;
+    justify-content: center;
+    @include elevate(top);
+    position: fixed;
+    top: map-get($layout-margin, sm);;
+    left: 0;
+    width: 100vw;
+
+    h1 {
+        $color: get-component-color(label);
+        @include component(label);
+        border: .25em solid map-get($color, fore);
+        padding: 1em;
+        font-size: 1em;
+    }
+}

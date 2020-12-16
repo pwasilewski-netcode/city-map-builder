@@ -1,0 +1,92 @@
+@import "../base/all";
+@import "city-tile";
+
+$map-width: $map-tile-width * $map-tiles - $map-tiles;
+$map-height: $map-tile-height * $map-tiles - $map-tiles;
+
+#map-grid {
+    width: $map-width;
+    height: $map-height;
+    transform: $map-tile-transform translate(50%, 50%);
+    display: grid;
+    grid-template-columns: repeat($map-tiles, 1fr);
+    grid-template-rows: repeat($map-tiles, 1fr);
+    position: relative;
+    top: (-$map-height / 2);
+    left: $button-size * 6;
+    margin: map-get($layout-margin, lg);
+    margin-bottom: 0;
+    @include elevate(middle);
+    box-shadow: 30px 5px 70px;
+
+    &.map--design {
+        .map-tile {
+            &:after {
+                background-color: rgba($darken-color, .05);
+                @include border-tile(left, $darken-color, 2px);
+                @include border-tile(top, $darken-color);
+                cursor: crosshair;
+            }
+    
+            &:nth-child(#{$map-tiles}n) {
+                &:after {
+                    @include border-tile(right, $darken-color, 2px);
+                }
+            }
+    
+            &:nth-child(n + #{$map-size - $map-tiles + 1}) {
+                &:after {
+                    @include border-tile(bottom, $darken-color);
+                }
+            }
+        }
+    }
+}
+
+@for $row from 1 through $map-tiles {
+    @for $col from 1 through $map-tiles {
+        $i: ($map-tiles * ($row - 1)) + $col;
+        #map-tile-#{$i} {
+            grid-column: $col;
+            grid-row: $row;
+        }
+    }
+}
+
+.map-tile {
+    box-sizing: border-box;
+    overflow: visible;
+    @include set-size(width, $map-tile-width - 1);
+    @include set-size(height, $map-tile-height - 1);
+    position: relative;
+
+    &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+    }
+
+    &:after {
+        width: 100%;
+        height: 100%;
+        transition: background-color .5s;
+    }
+
+    &:before {
+        width: $tile-width;
+        height: $tile-height;
+        background: transparent none no-repeat scroll 0% 100%;
+        background-size: contain;
+        transform: $map-tile-untransform;
+        @include elevate(bottom);
+    }
+
+    @extend %city-tiles;
+
+    &:hover {
+        &:after {
+            display: block;
+            background-color: $lighten-color !important;
+        }
+    }
+}

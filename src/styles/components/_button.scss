@@ -1,0 +1,36 @@
+@import "../base/all";
+
+.btn {
+    display: inline-block;
+    font-size: $button-font-size;
+    @include box($button-size, $button-size);
+    line-height: $button-size;
+    text-align: center;
+    @include component();
+    text-shadow: 0px 0px 1px $layout-darken-color;
+    cursor: pointer;
+
+    &.btn--active,
+    &:active,
+    &:hover,
+    &:focus {
+        $color: get-component-color(active);
+        background: map-get($color, back);
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+        text-shadow: 0px 0px 3px $layout-darken-color;
+    }
+
+    &:active {
+        box-shadow: $button-box-shadow, inset $button-box-shadow;
+
+        &:before {
+            position: relative;
+            top: 2px;
+            left: 2px;
+        }
+    }
+}

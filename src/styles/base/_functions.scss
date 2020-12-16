@@ -1,0 +1,14 @@
+@import "variables";
+
+@function pad-number($number, $length) {
+    $result: quote($number);
+    $from: str-length($result);
+    @for $i from $from to $length {
+        $result: "0" + $result;
+    }
+    @return $result;
+}
+
+@function get-component-color($type: default) {
+    @return map-get($component-colors, $type);
+}

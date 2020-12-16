@@ -1,0 +1,101 @@
+@import "../base/all";
+@import "button";
+
+#map-toolbox {
+    position: fixed;
+    top: map-get($layout-margin, lg);
+    left: map-get($layout-margin, sm);
+    @include elevate(top);
+}
+
+#map-toolbox-design {
+    position: absolute;
+    top: 0;
+    left: map-get($layout-margin, lg);
+    @include box(5 * $button-size, 80vh);
+    @include component();
+    transition: width 1s, height 1s, opacity 2s;
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &.map-toolbox--hidden {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    .map-toolbox-category {
+        border-radius: .5em;
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.15);
+        padding: .5em;
+        margin-bottom: .5em;
+
+        > h2 {
+            font-size: .75em;
+            margin-bottom: .5em;
+        }
+
+        > ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+            li {
+                width: 1.5 * $button-size;
+                height: 1.5 * $button-size;
+                cursor: pointer;
+                position: relative;
+                @include elevate(zero);
+
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background: transparent none no-repeat scroll 50% 50%;
+                    background-size: contain;
+                    transition: transform .5s;
+                    @include elevate(zero);
+                }
+
+                &:after {
+                    content: '';
+                    display: block;
+                    width: 1.5 * $button-size;
+                    height: ($button-size / 2);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    box-shadow: 0 .5em 1em .5em $layout-darken-color;
+                    opacity: 0;
+                    transition: opacity .5s;
+                    @include elevate(bottom);
+                }
+
+                &.map-toolbox-item--active {
+                    animation: shake-up-down 1s linear infinite;
+                }
+
+                &.map-toolbox-item--active,
+                &:hover {
+                    &:before {
+                        transform: scale(1.2);
+                    }
+
+                    &:after {
+                        opacity: 1;
+                    }
+                }
+
+                @extend %city-tiles;
+            }
+        }
+    }
+}

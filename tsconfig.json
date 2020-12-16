@@ -1,0 +1,12 @@
+{
+  "files": [
+    "./src/app/main.ts"
+  ],
+  "compilerOptions": {
+    "lib": ["es2015", "es2016", "dom"],
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    "target": "es5"
+  }
+}

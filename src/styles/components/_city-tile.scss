@@ -1,0 +1,22 @@
+@import "../base/all";
+
+$city-tiles-max-index: 127;
+
+@function get-city-tile($index) {
+    $i: pad-number($index, 3);
+    @return "cityTiles_#{$i}.png";
+}
+
+@mixin city-tile($index) {
+    background-image: url('/assets/#{get-city-tile($index)}');
+}
+
+%city-tiles {
+    @for $i from 0 through $city-tiles-max-index {
+        &[data-tile='city-#{$i}']{
+            &:before {
+                @include city-tile($i);
+            }
+        }
+    }
+}
